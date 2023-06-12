@@ -53,3 +53,9 @@ SELECT artist_name, track_name, danceability, energy
 SELECT artist_name, track_name,MIN(duration_ms) 
   FROM BIT_DB.Spotifydata;
    
+--CTE TASK--
+WITH popularity_average_CTE AS (SELECT s.artist_name, AVG(s.popularity) AS average_popularity
+        FROM spotifydata s 
+        GROUP BY s.artist_name)
+SELECT artist_name, average_popularity, 'Top Star' AS tag
+    FROM popularity_average_CTE WHERE average_popularity >= 90
