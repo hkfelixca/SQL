@@ -37,10 +37,13 @@ INSERT INTO flavors VALUES (14, "Coconut", 3);
 INSERT INTO flavors VALUES (15, "Unicorn", 5); 
 
 --Display the database ordered by quantity.
-
 SELECT * FROM flavors; 
 SELECT * FROM flavors WHERE quantity > 6 Order BY quantity; 
 
 --What are the most popular flavors?
-
 SELECT SUM(quantity) FROM flavors
+
+-- What is the avg price of items in the bulk section
+SELECT AVG(price) "avg bulk item price"
+FROM store
+where section='bulk'; 
