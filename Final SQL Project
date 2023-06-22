@@ -3,7 +3,7 @@
 SELECT * FROM chinook.customers
 WHERE country = "USA";
 
-#2Show Customers (their full names, customer ID, and country) who are in the Brazil. 
+#2 Show Customers (their full names, customer ID, and country) who are in the Brazil. 
 SELECT firstname, lastname, customerID FROM chinook.customers
 WHERE country = "Brazil"; 
 
@@ -14,7 +14,7 @@ LEFT JOIN chinook.invoices ci
 ON cc.customerId = ci.customerId
 WHERE billingcountry = "France";
 
-#4  Show the Employees who are Sales Agents.
+#4 Show the Employees who are Sales Agents.
 SELECT * FROM chinook.employees
 WHERE title = "Sales Support Agent";
 
