@@ -1,0 +1,107 @@
+##Overview 
+This project delves into the world of celebrities, focusing on notable personalities such as Phoebe Bridgers and Keanu Reeves. The dataset includes information about their names, ages, 
+professions, hobbies, and songs. The SQL queries extract insights into famous people's professions, songs, and hobbies, including singers, actors, and those without associated songs.
+
+## Database Structure:
+Two tables, `famous_people` and `professions`, were created to organize the celebrity data efficiently. The `famous_people` table includes details like names and ages, 
+while the `professions` table associates each individual with their profession, hobbies, and songs.
+
+    /** Famous People
+    Phoebe Bridgers
+    Hayley Williams
+    Carla Morrsion 
+    Ben Platt
+    Hailee Steinfeld
+    Jack Black
+    Zendaya
+    Emmy Rossum
+    Bradley Cooper
+    Keanu Reeves
+    Sandra Bullock
+    Adam Sandler
+    Gerard Butler
+    Russell Crowe 
+    Meryl Streep
+    */
+    
+    CREATE TABLE famous_people (
+      id INTEGER PRIMARY KEY, 
+      name TEXT, 
+      age INTEGER
+    );
+    
+    INSERT INTO famous_people (name, age) VALUES ("Phoebe Bridgers", 28);
+    INSERT INTO famous_people (name, age) VALUES ("Hayley Wiliams", 34);
+    INSERT INTO famous_people (name, age) VALUES ("Carla Morrison", 36);
+    INSERT INTO famous_people (name, age) VALUES ("Ben Platt", 29);
+    INSERT INTO famous_people (name, age) VALUES ("Hailee Steinfeld", 26);
+    INSERT INTO famous_people (name, age) VALUES ("Jack Black", 53);
+    INSERT INTO famous_people (name, age) VALUES ("Zendaya", 26);
+    INSERT INTO famous_people (name, age) VALUES ("Emmy Rossum", 26);
+    INSERT INTO famous_people (name, age) VALUES ("Bradley Cooper", 48);
+    INSERT INTO famous_people (name, age) VALUES ("Keanu Reeves", 58);
+    INSERT INTO famous_people (name, age) VALUES ("Sandra Bullock", 58);
+    INSERT INTO famous_people (name, age) VALUES ("Adam Sandler", 56);
+    INSERT INTO famous_people (name, age) VALUES ("Gerard Butler", 53);
+    INSERT INTO famous_people (name, age) VALUES ("Russell Crowe", 59);
+    INSERT INTO famous_people (name, age) VALUES ("Meryl Streep", 73); 
+    
+    CREATE TABLE professions (
+      id INTEGER PRIMARY KEY, 
+      profession TEXT,
+      hobbie TEXT,
+      person_id INTEGER,
+      songs TEXT
+    );
+    
+    INSERT INTO professions (profession, hobbie,person_id, songs) VALUES ("Singer", "none", 1, "Motion Sickness");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Singer","none", 2, "Asystole");
+    INSERT INTO professions (profession,hobbie, person_id, songs) VALUES ("Singer","none", 3, "Contigo");
+    INSERT INTO professions (profession,hobbie, person_id, songs) VALUES ("Singer", "Actor", 4, "imagine"); 
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Singer", "Actor", 5, "Flashlight");
+    INSERT INTO professions (profession,hobbie, person_id, songs) VALUES ("Singer","Actor", 6, "Tribute");
+    INSERT INTO professions (profession,hobbie, person_id, songs) VALUES ("Actor", "Singer", 7, "Replay");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor", "Singer",8, "Phantom of the Opera");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","Singer", 9, "Shallow");
+    INSERT INTO professions (profession,hobbie, person_id, songs) VALUES ("Actor","none", 10, "none");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","none", 11, "none");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","none",12,"none");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","none", 13, "none");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","none", 14, "none");
+    INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","none", 15, "none");
+
+**Queries**
+``sql
+### 1.  Which famous people are singers, and what songs are associated with them?
+    -- Retrieves information about famous people's names, professions, songs, and hobbies by joining the famous_people and professions tables on the id and person_id fields.
+        SELECT famous_people.name, professions.profession, professions.songs, professions.hobbie FROM famous_people   
+            JOIN professions 
+            ON famous_people.id = professions.person_id;
+        
+### 2. Which famous people are singers, and what songs are associated with them?
+    -- Retrieves information about famous people's names, professions, and songs where the profession is "Singer" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.profession, professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE profession = "Singer";
+
+### 3. Among the famous people who are singers, what hobbies do they have, and what songs are associated with them?
+    -- Retrieves information about famous people's names, hobbies, and songs where the hobby is "Singer" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.hobbie, Professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE hobbie = "Singer";
+
+### 4. Among the famous people who are actors, what hobbies do they have, and what songs are associated with them?
+   -- Retrieves information about famous people's names, their hobbies, and songs where the hobby is "Actor" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.hobbie, Professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE hobbie = "Actor";
+
+### 5. Who are the famous people with no associated songs, and what are their professions?
+    -- Retrieves information about famous people's names, their professions, and songs where the songs are "none" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.profession, professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE songs = "none"
