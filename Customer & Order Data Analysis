@@ -1,5 +1,5 @@
 ##Overview
--- In this SQL script, I'm querying a database with multiple tables to quantify statistics about customer and order data.
+-- In this SQL script, I'm querying a database with multiple tables to quantify statistics about customer and order data using SQLiteSTudio.
 
 -- #1. How many orders were placed in January?
 SELECT COUNT(orderid)
