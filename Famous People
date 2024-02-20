@@ -1,9 +1,6 @@
-The provided code defines and populates two database tables, famous_people and professions, with information about various celebrities. 
-The famous_people table includes details such as names and ages, while the professions table associates each individual with their profession, 
-hobbies, and songs. Notable personalities like Phoebe Bridgers, Keanu Reeves, and Meryl Streep are included in the dataset.
-The subsequent SQL queries extract insights, including details about famous people and their professions, songs associated with singers and 
-actors, as well as identifying individuals with no associated songs.
-
+#The code defines two tables, famous_people and professions, containing information about celebrities' names, ages, professions, hobbies, and songs.
+    Notable personalities like Phoebe Bridgers and Keanu Reeves are included. Queries extract insights about famous people's professions, songs, 
+    and hobbies, including singers, actors, and those with no associated songs.
 
 /** Famous People
 Phoebe Bridgers
@@ -66,37 +63,36 @@ INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","
 INSERT INTO professions (profession, hobbie, person_id, songs) VALUES ("Actor","none", 15, "none");
 
 
-1. Who are the famous people, and what are their professions, songs, and hobbies?
-Retrieves information about famous people's names, professions, songs, and hobbies by joining the famous_people and professions tables on the id and person_id fields.
-
-    SELECT famous_people.name, professions.profession, professions.songs, professions.hobbie FROM famous_people   
-        JOIN professions 
-        ON famous_people.id = professions.person_id;
+    #1 Who are the famous people, and what are their professions, songs, and hobbies?
+    --Retrieves information about famous people's names, professions, songs, and hobbies by joining the famous_people and professions tables on the id and person_id fields.
+        SELECT famous_people.name, professions.profession, professions.songs, professions.hobbie FROM famous_people   
+            JOIN professions 
+            ON famous_people.id = professions.person_id;
         
-2. Which famous people are singers, and what songs are associated with them?
-- Retrieves information about famous people's names, professions, and songs where the profession is "Singer" by joining the famous_people and professions tables and filtering the results.
+    #2 Which famous people are singers, and what songs are associated with them?
+    --Retrieves information about famous people's names, professions, and songs where the profession is "Singer" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.profession, professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE profession = "Singer";
 
-    SELECT famous_people.name, professions.profession, professions.songs FROM famous_people
-       JOIN professions 
-        ON famous_people.id = professions.person_id
-        WHERE profession = "Singer";
+    #3 Among the famous people who are singers, what hobbies do they have, and what songs are associated with them?
+    --Retrieves information about famous people's names, hobbies, and songs where the hobby is "Singer" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.hobbie, Professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE hobbie = "Singer";
 
-3. Among the famous people who are singers, what hobbies do they have, and what songs are associated with them?
-Retrieves information about famous people's names, hobbies, and songs where the hobby is "Singer" by joining the famous_people and professions tables and filtering the results.
-    SELECT famous_people.name, professions.hobbie, Professions.songs FROM famous_people
-       JOIN professions 
-        ON famous_people.id = professions.person_id
-        WHERE hobbie = "Singer";
+    #4 Among the famous people who are actors, what hobbies do they have, and what songs are associated with them?
+   --Retrieves information about famous people's names, their hobbies, and songs where the hobby is "Actor" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.hobbie, Professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE hobbie = "Actor";
 
-4. Among the famous people who are actors, what hobbies do they have, and what songs are associated with them?
-Retrieves information about famous people's names, their hobbies, and songs where the hobby is "Actor" by joining the famous_people and professions tables and filtering the results.
-    SELECT famous_people.name, professions.hobbie, Professions.songs FROM famous_people
-       JOIN professions 
-        ON famous_people.id = professions.person_id
-        WHERE hobbie = "Actor";
-5. Who are the famous people with no associated songs, and what are their professions?
-Retrieves information about famous people's names, their professions, and songs where the songs are "none" by joining the famous_people and professions tables and filtering the results.
-    SELECT famous_people.name, professions.profession, professions.songs FROM famous_people
-       JOIN professions 
-        ON famous_people.id = professions.person_id
-        WHERE songs = "none"
+    #5 Who are the famous people with no associated songs, and what are their professions?
+    --Retrieves information about famous people's names, their professions, and songs where the songs are "none" by joining the famous_people and professions tables and filtering the results.
+        SELECT famous_people.name, professions.profession, professions.songs FROM famous_people
+           JOIN professions 
+            ON famous_people.id = professions.person_id
+            WHERE songs = "none"
