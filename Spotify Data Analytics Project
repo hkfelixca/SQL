@@ -62,4 +62,4 @@ time_signature integer NOT NULL
     SELECT artist_name, average_popularity, 'Top Star' AS tag
       FROM popularity_average_CTE WHERE average_popularity >= 90
 
-# Feel free to explore the queries and results in this project. If you have any questions, reach out via email at hannafelix232@gmail.com.
+-- Feel free to explore the queries and results in this project. If you have any questions, reach out via email at hannafelix232@gmail.com.
