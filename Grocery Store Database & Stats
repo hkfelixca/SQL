@@ -1,3 +1,6 @@
+#In this introductory SQL code, exploring a Chinook database for the first time, various queries are executed to retrieve information on customers, 
+  employees, invoices, and sales, providing insights into the dataset.
+
 --Create a grocery store database
 
 /** Ice Cream Store:
@@ -36,14 +39,15 @@ INSERT INTO flavors VALUES (13, "Coco Loco", 8);
 INSERT INTO flavors VALUES (14, "Coconut", 3); 
 INSERT INTO flavors VALUES (15, "Unicorn", 5); 
 
---Display the database ordered by quantity.
-SELECT * FROM flavors; 
-SELECT * FROM flavors WHERE quantity > 6 Order BY quantity; 
+#1 Display the database ordered by quantity.
+  SELECT * FROM flavors; 
 
---What are the most popular flavors?
-SELECT SUM(quantity) FROM flavors
+  SELECT * FROM flavors WHERE quantity > 6 Order BY quantity; 
 
--- What is the avg price of items in the bulk section
-SELECT AVG(price) "avg bulk item price"
-FROM store
-where section='bulk'; 
+#2 What are the most popular flavors?
+  SELECT SUM(quantity) FROM flavors
+
+#3 What is the avg price of items in the bulk section
+  SELECT AVG(price) "avg bulk item price"
+    FROM store
+    WHERE section='bulk'; 
