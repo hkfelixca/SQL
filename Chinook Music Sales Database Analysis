@@ -1,0 +1,59 @@
+-- Overview
+-- The provided SQL code queries a Chinook database, focusing on customer information, employee titles, and sales data.
+-- It extracts details such as customer names and IDs for specific countries, invoices for French customers, and total sales amounts by sales agents.
+-- Additionally, it delves into sales statistics for the year 2013 and identifies the top-performing sales agent in terms of revenue in 2009.
+
+-- #1 Which customers are located in the USA?
+SELECT * FROM chinook.customers
+  WHERE country = 'USA';
+
+-- #2 Who are the customers in Brazil, and what are their full names, customer IDs, and country?
+SELECT firstname, lastname, customerID, country FROM chinook.customers
+  WHERE country = 'Brazil'; 
+
+-- #3 What are the invoices for customers from France, including their full names, Invoice IDs, dates of the invoices, and billing countries?
+SELECT ci.invoiceid, cc.firstname, cc.lastname, ci.invoicedate, ci.billingcountry
+  FROM chinook.customers cc
+  LEFT JOIN chinook.invoices ci ON cc.customerId = ci.customerId
+  WHERE billingcountry = 'France';
+
+-- #4 Who are the employees with the title "Sales Support Agent"?
+SELECT * FROM chinook.employees
+  WHERE title = 'Sales Support Agent';
+
+-- #5 What is the unique list of billing countries present in the Invoice table?
+SELECT DISTINCT billingcountry FROM chinook.invoices;
+
+-- #6 What are the invoice total, customer name, country, and sales agent name for all invoices and customers?
+SELECT emp.LastName AS agent_last_name, emp.Firstname AS agent_first_name, cust.FirstName, cust.LastName, cust.Country, inv.total AS invoice_total
+  FROM chinook.employees emp 
+  JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+  JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+-- #7 How many invoices were generated in the year 2013?
+SELECT COUNT(*) AS total_invoices FROM chinook.invoices
+WHERE invoicedate BETWEEN '2013-01-01' AND '2013-12-31';
+
+-- #8 What is the total sales amount for the year 2013?
+SELECT SUM(TOTAL) AS total_sales FROM chinook.invoices
+  WHERE invoicedate BETWEEN '2013-01-01' AND '2013-12-31';
+
+-- #9 What is the total sales amount for each sales agent with the title "Sales Support Agent"?
+SELECT emp.FirstName, emp.LastName,
+  ROUND(SUM(Inv.Total), 2) AS 'Total Sales' 
+  FROM chinook.Employees emp
+  JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+  JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId
+  WHERE emp.Title = 'Sales Support Agent' 
+  GROUP BY emp.FirstName, emp.LastName;
+
+-- #10 Who is the sales agent that achieved the highest sales in terms of dollars in the year 2009?
+SELECT emp.FirstName, emp.LastName,
+  ROUND(SUM(Inv.Total), 2) AS 'Total Sales' 
+  FROM chinook.Employees emp
+  JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+  JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId
+  WHERE emp.Title = 'Sales Support Agent' AND YEAR(Inv.InvoiceDate) = 2009
+  GROUP BY emp.FirstName, emp.LastName
+  ORDER BY SUM(Inv.Total) DESC
+  LIMIT 1;
