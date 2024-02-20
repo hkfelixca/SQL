@@ -1,5 +1,5 @@
 ##Overview
-For this project, I leveraged Spotify data obtained from Kaggle to perform analytics using SQL in SQLiteStudio. 
+For this project, I leveraged Spotify data obtained from Kaggle to perform analytics using SQLiteStudio. 
 The dataset includes information about various tracks, such as artist names, track names, popularity, danceability, and more.
 
 ## Data Preparation:
