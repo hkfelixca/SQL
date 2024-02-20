@@ -2,6 +2,7 @@
 -- The provided SQL code queries a Chinook database, focusing on customer information, employee titles, and sales data.
 -- It extracts details such as customer names and IDs for specific countries, invoices for French customers, and total sales amounts by sales agents.
 -- Additionally, it delves into sales statistics for the year 2013 and identifies the top-performing sales agent in terms of revenue in 2009.
+--This project was queried in SQLiteStudio.
 
 -- #1 Which customers are located in the USA?
 SELECT * FROM chinook.customers
